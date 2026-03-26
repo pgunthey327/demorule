@@ -12,8 +12,8 @@ export function evaluatePolicy(state, age, workstream, premiumAmount) {
     workstream === "WC" &&
     premiumAmount < 10000
   ) {
-    result.extensionToCoverage = true;
-    result.durationExtension = 10;
+    result.extensionToCoverage = false;
+    result.durationExtension = 20;
   }
 
   return result;
