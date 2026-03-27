@@ -1,6 +1,10 @@
-export function evaluatePolicy(state, age, workstream, premiumAmount) {
+module.exports = {
+  rulename: '10000016',
+  ruleId: 'b0e4d8f9-f4bc-4ce1-c39a-e08e9f0b1c2d',
+  description: 'Evaluates insurance policy eligibility for a coverage extension based on state, age, workstream, and premium amount criteria',
+  rule: `export function evaluatePolicy(state, age, workstream, premiumAmount) {
   const validStates = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
-  
+
   let result = {
     extensionToCoverage: false,
     durationExtension: 0
@@ -20,4 +24,5 @@ export function evaluatePolicy(state, age, workstream, premiumAmount) {
 }
 
 // Example usage
-console.log(evaluatePolicy("MH", 45, "WC", 8000));
+console.log(evaluatePolicy("MH", 45, "WC", 8000));`
+};
