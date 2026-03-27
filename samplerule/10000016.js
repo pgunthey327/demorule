@@ -1,8 +1,11 @@
 module.exports = {
   rulename: '10000016',
-  ruleId: 'b0e4d8f9-f4bc-4ce1-c39a-e08e9f0b1c2d',
+  ruleId: '1000023',
   description: 'Evaluates insurance policy eligibility for a coverage extension based on state, age, workstream, and premium amount criteria',
-  rule: `export function evaluatePolicy(state, age, workstream, premiumAmount) {
+  rule: `import { isNumber } from "./.config/helpers/isNumber.js";
+import { isString } from "./.config/helpers/isString.js";
+
+export function evaluatePolicy(state, age, workstream, premiumAmount) {
   const validStates = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
 
   let result = {
@@ -10,14 +13,18 @@ module.exports = {
     durationExtension: 0
   };
 
+  if (!isString(state) || !isNumber(age) || !isString(workstream) || !isNumber(premiumAmount)) {
+    return result;
+  }
+
   if (
     validStates.includes(state) &&
     age < 60 &&
     workstream === "WC" &&
     premiumAmount < 10000
   ) {
-    result.extensionToCoverage = true;
-    result.durationExtension = 10;
+    result.extensionToCoverage = false;
+    result.durationExtension = 20;
   }
 
   return result;
