@@ -6,26 +6,30 @@ module.exports = {
 import { isString } from "./.config/helpers/isString.js";
 
 export function evaluatePolicy(state, age, workstream, premiumAmount, businessUnit, subGroup, underwritingGroupCode) {
-  const validStates = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
+  const ELIGIBLE_STATES = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
+  const MAX_AGE = 60;
+  const MAX_PREMIUM = 10000;
+  const REQUIRED_WORKSTREAM = "WC";
+  const REQUIRED_UW_GROUP_CODE = "10000016";
 
-  let result = {
+  const result = {
     extensionToCoverage: false,
     durationExtension: 0
   };
 
-  if (
+  const isEligible =
     isString(state) &&
-    validStates.includes(state) &&
+    ELIGIBLE_STATES.includes(state) &&
     isNumber(age) &&
-    age < 60 &&
-    workstream === "WC" &&
+    age < MAX_AGE &&
+    workstream === REQUIRED_WORKSTREAM &&
     businessUnit === null &&
     subGroup === null &&
-    underwritingGroupCode === "10000016" &&
+    underwritingGroupCode === REQUIRED_UW_GROUP_CODE &&
     isNumber(premiumAmount) &&
-    premiumAmount < 10000
-  ) {
-    result.extensionToCoverage = false;
+    premiumAmount < MAX_PREMIUM;
+
+  if (isEligible) {
     result.durationExtension = 20;
   }
 
