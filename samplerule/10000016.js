@@ -1,5 +1,5 @@
 /**
- * @author autobots
+ * @author DEMOAUTHOR
  */
 module.exports = {
   rulename: '10000016',
