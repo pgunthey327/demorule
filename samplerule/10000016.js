@@ -1,5 +1,5 @@
 /**
- * @author team SPARTA
+ * @author team PRIME
  */
 module.exports = {
   rulename: '10000016',
