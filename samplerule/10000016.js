@@ -1,5 +1,5 @@
 /**
- * @author OPTIMUS TEAM
+ * @author team SPARTA
  */
 module.exports = {
   rulename: '10000016',
@@ -33,22 +33,16 @@ export function evaluatePolicy(state, age, workstream, premiumAmount) {
     throw new Error("Invalid input types");
   }
 
-  const result = {
-    extensionToCoverage: false,
-    durationExtension: 0
-  };
-
   const isEligible =
     VALID_STATES.includes(state) &&
     age < MAX_AGE &&
     workstream === REQUIRED_WORKSTREAM &&
     premiumAmount < MAX_PREMIUM;
 
-  if (isEligible) {
-    result.durationExtension = EXTENSION_DURATION;
-  }
-
-  return result;
+  return {
+    extensionToCoverage: false,
+    durationExtension: isEligible ? EXTENSION_DURATION : 0
+  };
 }
 
 // Example usage
