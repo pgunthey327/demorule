@@ -1,6 +1,5 @@
 /**
- * @author team PRIME
- * @author PRATHMESH
+ * @author autobots
  */
 module.exports = {
   rulename: '10000016',
