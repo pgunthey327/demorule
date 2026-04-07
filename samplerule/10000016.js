@@ -9,26 +9,31 @@ module.exports = {
   rule: `import { isNumber } from "./.config/helpers/isNumber.js";
 import { isString } from "./.config/helpers/isString.js";
 
-export function evaluatePolicy(state, age, workstream, premiumAmount) {
-  const validStates = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
+// Eligible states for coverage extension
+const VALID_STATES = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
+const MAX_AGE = 60;
+const MAX_PREMIUM = 10000;
+const REQUIRED_WORKSTREAM = "WC";
+const EXTENSION_DURATION = 20;
 
+export function evaluatePolicy(state, age, workstream, premiumAmount) {
   if (!isString(state) || !isNumber(age) || !isString(workstream) || !isNumber(premiumAmount)) {
     throw new Error("Invalid input types");
   }
 
-  let result = {
+  const result = {
     extensionToCoverage: false,
     durationExtension: 0
   };
 
-  if (
-    validStates.includes(state) &&
-    age < 60 &&
-    workstream === "WC" &&
-    premiumAmount < 10000
-  ) {
-    result.extensionToCoverage = false;
-    result.durationExtension = 20;
+  const isEligible =
+    VALID_STATES.includes(state) &&
+    age < MAX_AGE &&
+    workstream === REQUIRED_WORKSTREAM &&
+    premiumAmount < MAX_PREMIUM;
+
+  if (isEligible) {
+    result.durationExtension = EXTENSION_DURATION;
   }
 
   return result;
