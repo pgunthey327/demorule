@@ -1,3 +1,6 @@
+/**
+ * @author FLOWTEAM
+ */
 module.exports = {
   rulename: '10000016',
   ruleId: 'b0e4d8f9-f4bc-4ce1-c39a-e08e9f0b1c2d',
@@ -16,15 +19,18 @@ const MAX_PREMIUM = 10000;
 const REQUIRED_WORKSTREAM = "WC";
 const EXTENSION_DURATION = 20;
 
+/**
+ * Evaluates whether an insurance policy qualifies for a coverage extension.
+ * @param {string} state - The policyholder's state code.
+ * @param {number} age - The policyholder's age.
+ * @param {string} workstream - The policy workstream identifier.
+ * @param {number} premiumAmount - The policy premium amount.
+ * @returns {{ extensionToCoverage: boolean, durationExtension: number }}
+ */
 export function evaluatePolicy(state, age, workstream, premiumAmount) {
   if (!isString(state) || !isNumber(age) || !isString(workstream) || !isNumber(premiumAmount)) {
     throw new Error("Invalid input types");
   }
-
-  const result = {
-    extensionToCoverage: false,
-    durationExtension: 0
-  };
 
   const isEligible =
     VALID_STATES.includes(state) &&
@@ -32,11 +38,10 @@ export function evaluatePolicy(state, age, workstream, premiumAmount) {
     workstream === REQUIRED_WORKSTREAM &&
     premiumAmount < MAX_PREMIUM;
 
-  if (isEligible) {
-    result.durationExtension = EXTENSION_DURATION;
-  }
-
-  return result;
+  return {
+    extensionToCoverage: false,
+    durationExtension: isEligible ? EXTENSION_DURATION : 0
+  };
 }
 
 // Example usage
