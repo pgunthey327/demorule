@@ -1,5 +1,6 @@
 /**
  * @author team PRIME
+ * @author PRATHMESH
  */
 module.exports = {
   rulename: '10000016',
@@ -29,10 +30,12 @@ export function evaluatePolicy(state, age, workstream, premiumAmount) {
   const MAX_PREMIUM = 10000;
   const EXTENSION_DURATION = 20;
 
+  // Validate that all inputs match their expected types
   if (!isString(state) || !isNumber(age) || !isString(workstream) || !isNumber(premiumAmount)) {
     throw new Error("Invalid input types");
   }
 
+  // Determine eligibility by checking all criteria simultaneously
   const isEligible =
     VALID_STATES.includes(state) &&
     age < MAX_AGE &&
