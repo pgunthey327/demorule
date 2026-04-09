@@ -1,3 +1,9 @@
+/**
+ * @author TEAM PRIMUS
+ * Rule: 10000020
+ * Generates a sales report with total, average, and maximum sale amounts
+ * from a dataset.
+ */
 module.exports = {
   rulename: '10000020',
   ruleId: 'c5f9e3a4-af67-4d9c-de45-9b3f4a5c6d7e',

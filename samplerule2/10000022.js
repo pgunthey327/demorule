@@ -1,3 +1,9 @@
+/**
+ * @author TEAM PRIMUS
+ * Rule: 10000022
+ * Calculates employee gross and net salary from base pay, bonus,
+ * and deductions.
+ */
 module.exports = {
   rulename: '10000022',
   ruleId: 'b4e8d2f3-9f56-4c8b-cd34-8a2e3f4b5c6d',

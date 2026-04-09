@@ -1,3 +1,9 @@
+/**
+ * @author TEAM PRIMUS
+ * Rule: 10000019
+ * Calculates total loyalty points earned from a list of purchase amounts,
+ * awarding more points for purchases above a threshold.
+ */
 module.exports = {
   rulename: '10000019',
   ruleId: 'e7b1a5c6-c189-4fbe-f067-bd5b6c7e8f9a',

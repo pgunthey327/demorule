@@ -1,3 +1,9 @@
+/**
+ * @author TEAM PRIMUS
+ * Rule: 10000021
+ * Calculates the Equated Monthly Instalment (EMI) for a loan given
+ * principal amount, annual interest rate, and tenure in months.
+ */
 module.exports = {
   rulename: '10000021',
   ruleId: 'd6a0f4b5-b078-4ead-ef56-ac4a5b6d7e8f',
