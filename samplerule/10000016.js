@@ -1,3 +1,6 @@
+/**
+ * @author TEAM OPTIMUS
+ */
 module.exports = {
   rulename: '10000016',
   ruleId: 'b0e4d8f9-f4bc-4ce1-c39a-e08e9f0b1c2d',
@@ -9,27 +12,39 @@ module.exports = {
   rule: `import { isNumber } from "./.config/helpers/isNumber.js";
 import { isString } from "./.config/helpers/isString.js";
 
+/**
+ * Evaluates whether an insurance policy qualifies for a coverage extension
+ * based on state, age, workstream, and premium amount.
+ *
+ * @param {string} state - The state code (e.g. "MH", "KA").
+ * @param {number} age - The policyholder's age.
+ * @param {string} workstream - The workstream identifier (e.g. "WC").
+ * @param {number} premiumAmount - The premium amount in currency units.
+ * @returns {{ extensionToCoverage: boolean, durationExtension: number }}
+ */
 export function evaluatePolicy(state, age, workstream, premiumAmount) {
-  const validStates = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
+  const VALID_STATES = ["KA", "GJ", "RJ", "MH", "DL", "AP"];
+  const MAX_AGE = 60;
+  const REQUIRED_WORKSTREAM = "WC";
+  const PREMIUM_THRESHOLD = 10000;
 
   if (!isString(state) || !isNumber(age) || !isString(workstream) || !isNumber(premiumAmount)) {
     throw new Error("Invalid input types");
   }
 
-  let result = {
+  const result = {
     extensionToCoverage: false,
     durationExtension: 0
   };
 
-  if (
-    validStates.includes(state) &&
-    age < 60 &&
-    workstream === "WC"
-  ) {
-    if (premiumAmount < 10000) {
-      result.extensionToCoverage = false;
-      result.durationExtension = 20;
-    }
+  const isEligible =
+    VALID_STATES.includes(state) &&
+    age < MAX_AGE &&
+    workstream === REQUIRED_WORKSTREAM &&
+    premiumAmount < PREMIUM_THRESHOLD;
+
+  if (isEligible) {
+    result.durationExtension = 20;
   }
 
   return result;
